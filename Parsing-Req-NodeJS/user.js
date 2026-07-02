@@ -45,7 +45,7 @@ const userRequestHandler = (req, res) => {
             // }
             const bodyObject = Object.fromEntries(params);
             console.log(bodyObject);
-            fs.writeFileSync("user.txt", JSON.stringify(bodyObject));
+            fs.writeFileSync("user.txt", JSON.stringify(bodyObject)); //This is a synchronous function makes it to go in a blocking condition I will fix it later
         });
 
         res.statusCode = 302;
