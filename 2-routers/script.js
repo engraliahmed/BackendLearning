@@ -133,7 +133,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const auth = require("./routers/auth");
+const auth = require("./auth");
 
 app.use("/api", auth);
 
