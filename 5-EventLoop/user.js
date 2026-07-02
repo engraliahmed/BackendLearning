@@ -1,3 +1,4 @@
+const { error } = require("console");
 const fs = require("fs");
 
 const userRequestHandler = (req, res) => {
@@ -39,24 +40,23 @@ const userRequestHandler = (req, res) => {
             console.log(fullBody);
 
             const params = new URLSearchParams(fullBody);
-            // const bodyObject = {};
-            // for (const [key, val] of params.entries()) {
-            //     bodyObject[key] = val;
-            // }
             const bodyObject = Object.fromEntries(params);
             console.log(bodyObject);
-            fs.writeFileSync("user.txt", JSON.stringify(bodyObject)); //This is a synchronous function makes it to go in a blocking condition I will fix it later
+            fs.writeFile("user.txt", JSON.stringify(bodyObject), (error) => {
+                console.log("Data written successfully");
+            }); //Here function is changed
+            res.statusCode = 302;
+            res.setHeader("Location", "/");
+            return res.end();
         });
-
-        res.statusCode = 302;
-        res.setHeader("Location", "/");
+    } else {
+        res.setHeader("Content-Type", "text/html");
+        res.write("<html>");
+        res.write("<head><title>Complete Coding</title></head>");
+        res.write("<body><h1>Like / Share / Subscribe</h1></body>");
+        res.write("</html>");
+        res.end();
     }
-    res.setHeader("Content-Type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Complete Coding</title></head>");
-    res.write("<body><h1>Like / Share / Subscribe</h1></body>");
-    res.write("</html>");
-    res.end();
 };
 
 module.exports = userRequestHandler;
