@@ -1,0 +1,19 @@
+{
+  "name": "backendlearning",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Ali Ahmed",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
