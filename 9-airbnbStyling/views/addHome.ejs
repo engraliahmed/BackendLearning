@@ -1,0 +1,23 @@
+<%- include('partials/head')%>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <%- include('partials/nav')%>
+
+  <main class="mx-auto max-w-5xl px-6 py-16">
+    <form action="/host/add-home" method="POST"
+      class="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-8 shadow-sm space-y-5">
+      <div>
+        <label for="houseName" class="mb-2 block text-sm font-medium text-slate-700">House name</label>
+        <input id="houseName" type="text" name="houseName" placeholder="Enter the name of your house"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-red-400 focus:ring-2 focus:ring-red-100" />
+      </div>
+      <button type="submit"
+        class="inline-flex rounded-xl bg-red-500 px-5 py-3 font-semibold text-white transition hover:bg-red-600">
+        Save Home
+      </button>
+    </form>
+  </main>
+</body>
+
+</html>
