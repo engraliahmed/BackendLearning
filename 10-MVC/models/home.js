@@ -23,7 +23,6 @@ module.exports = class Home {
             });
         });
     }
-
     static fetchAll(callback) {
         const homePath = path.join(rootDir, "data", "homes.json");
         fs.readFile(homePath, (err, data) => {
