@@ -13,12 +13,3 @@ exports.postAddHome = (req, res, next) => {
 
     res.render("host/homeAdded", { pageTitle: "Success" });
 };
-
-exports.getHomes = (req, res, next) => {
-    const registeredHomes = Home.fetchAll((registeredHomes) =>
-        res.render("store/homepage", {
-            registeredHomes,
-            pageTitle: "airbnb Home",
-        }),
-    );
-};
