@@ -2,9 +2,9 @@ const Home = require("../models/home");
 
 exports.getHomes = (req, res, next) => {
     const registeredHomes = Home.fetchAll((registeredHomes) =>
-        res.render("store/homepage", {
+        res.render("store/home-list", {
             registeredHomes,
-            pageTitle: "Home Page",
+            pageTitle: "Homes List",
         }),
     );
 };
@@ -24,8 +24,8 @@ exports.getBookings = (req, res, next) => {
     });
 };
 
-exports.getFavouriteList = (req, res, next) =>{
+exports.getFavouriteList = (req, res, next) => {
     res.render("store/favourites", {
-        pageTitle: "Favourites"
-    })
-}
+        pageTitle: "Favourites",
+    });
+};
