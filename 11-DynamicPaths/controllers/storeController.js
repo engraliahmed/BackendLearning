@@ -29,3 +29,13 @@ exports.getFavouriteList = (req, res, next) => {
         pageTitle: "Favourites",
     });
 };
+
+exports.getHomeDetails = (req, res, next) => {
+    const registeredHomes = Home.fetchAll((registeredHomes) =>
+        res.render("store/home-list", {
+            registeredHomes,
+            pageTitle: "Homes List",
+        }),
+    );
+};
+
