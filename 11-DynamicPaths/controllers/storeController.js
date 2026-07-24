@@ -1,3 +1,4 @@
+const { cacheSignal } = require("react");
 const Home = require("../models/home");
 
 exports.getHomes = (req, res, next) => {
@@ -31,11 +32,9 @@ exports.getFavouriteList = (req, res, next) => {
 };
 
 exports.getHomeDetails = (req, res, next) => {
-    const registeredHomes = Home.fetchAll((registeredHomes) =>
-        res.render("store/home-list", {
-            registeredHomes,
-            pageTitle: "Homes List",
-        }),
-    );
+    const homeID = req.params.homeID;
+    console.log(homeID);
+    res.render("store/homeDetails", {
+        pageTitle: "Homes Details",
+    });
 };
-
