@@ -1,4 +1,3 @@
-const { cacheSignal } = require("react");
 const Home = require("../models/home");
 
 exports.getHomes = (req, res, next) => {
@@ -32,8 +31,8 @@ exports.getFavouriteList = (req, res, next) => {
 };
 
 exports.getHomeDetails = (req, res, next) => {
-    const homeID = req.params.homeID;
-    console.log(homeID);
+    const homeId = req.params.homeId;
+    console.log(homeId);
     res.render("store/homeDetails", {
         pageTitle: "Homes Details",
     });
