@@ -34,9 +34,14 @@ exports.getHomeDetails = (req, res, next) => {
     const homeId = req.params.homeId;
     console.log(homeId);
     Home.findById(homeId, (home) => {
-        console.log("Home details found", home);
-        res.render("store/homeDetails", {
-            pageTitle: "Homes Details",
-        });
+        if (!home) {
+            console.log("Home not found");
+            res.redirect("/homes");
+        } else {
+            console.log("Home details found", home);
+            res.render("store/homeDetails", {
+                pageTitle: "Homes Details",
+            });
+        }
     });
 };
