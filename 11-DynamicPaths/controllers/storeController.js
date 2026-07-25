@@ -30,6 +30,11 @@ exports.getFavouriteList = (req, res, next) => {
     });
 };
 
+exports.postAddToFavourite = (req, res, next) => {
+    console.log("Home added to favourite list: ", req.body);
+    res.redirect("/favourites");
+};
+
 exports.getHomeDetails = (req, res, next) => {
     const homeId = req.params.homeId;
     console.log(homeId);
@@ -38,7 +43,7 @@ exports.getHomeDetails = (req, res, next) => {
             console.log("Home not found");
             res.redirect("/homes");
         } else {
-            console.log("Home details found", home);
+            // console.log("Home details found", home);
             res.render("store/homeDetails", {
                 home: home,
                 pageTitle: `${home.houseName} - ${home.location}`,
