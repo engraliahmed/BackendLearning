@@ -41,6 +41,7 @@ exports.getHomeDetails = (req, res, next) => {
             console.log("Home details found", home);
             res.render("store/homeDetails", {
                 pageTitle: "Homes Details",
+                home: home,
             });
         }
     });
