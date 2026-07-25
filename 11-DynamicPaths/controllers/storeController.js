@@ -33,7 +33,10 @@ exports.getFavouriteList = (req, res, next) => {
 exports.getHomeDetails = (req, res, next) => {
     const homeId = req.params.homeId;
     console.log(homeId);
-    res.render("store/homeDetails", {
-        pageTitle: "Homes Details",
+    Home.findById(homeId, (home) => {
+        console.log("Home details found", home);
+        res.render("store/homeDetails", {
+            pageTitle: "Homes Details",
+        });
     });
 };
