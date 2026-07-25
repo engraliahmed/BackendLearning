@@ -16,7 +16,9 @@
     --color-red-700: oklch(50.5% 0.213 27.518);
     --color-red-900: oklch(39.6% 0.141 25.723);
     --color-orange-100: oklch(95.4% 0.038 75.164);
+    --color-orange-600: oklch(64.6% 0.222 41.116);
     --color-orange-800: oklch(47% 0.157 37.304);
+    --color-orange-950: oklch(26.6% 0.079 36.259);
     --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-emerald-50: oklch(97.9% 0.021 166.113);
@@ -779,6 +781,12 @@
     }
     .hover\:bg-emerald-800:hover {
       background-color: var(--color-emerald-800);
+    }
+    .hover\:bg-orange-600:hover {
+      background-color: var(--color-orange-600);
+    }
+    .hover\:bg-orange-950:hover {
+      background-color: var(--color-orange-950);
     }
     .hover\:bg-red-100:hover {
       background-color: var(--color-red-100);
