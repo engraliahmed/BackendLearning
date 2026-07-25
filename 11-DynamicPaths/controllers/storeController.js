@@ -40,8 +40,8 @@ exports.getHomeDetails = (req, res, next) => {
         } else {
             console.log("Home details found", home);
             res.render("store/homeDetails", {
-                pageTitle: "Homes Details",
                 home: home,
+                pageTitle: `${home.houseName} - ${home.location}`,
             });
         }
     });
