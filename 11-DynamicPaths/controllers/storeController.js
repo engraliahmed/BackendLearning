@@ -26,15 +26,14 @@ exports.getBookings = (req, res, next) => {
 };
 
 exports.getFavouriteList = (req, res, next) => {
-    Favourite.getFavourite((favourites) => {
+    Favourite.getFavourite((favouriteIds) => {
         Home.fetchAll((registeredHomes) => {
-            const favouriteWithDetails = favourites.map((homeId) => {
-                registeredHomes.find((home) => {
-                    home.id === homeId;
-                });
-            });
+            const favouriteHomes = registeredHomes.filter((home) =>
+                favouriteIds.includes(home.id),
+            );
+
             res.render("store/favourites", {
-                favourites: favouriteWithDetails,
+                favourites: favouriteHomes,
                 pageTitle: "Favourites",
             });
         });
