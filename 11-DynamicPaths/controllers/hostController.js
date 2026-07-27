@@ -8,10 +8,11 @@ exports.getAddHome = (req, res, next) => {
 
 exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId;
-    const editing = req.query.editing;
+    const editing = req.query.editing === "true";
     console.log(homeId, editing);
     res.render("host/editHome", {
         pageTitle: "Edit Home",
+        editing: editing,
     });
 };
 
