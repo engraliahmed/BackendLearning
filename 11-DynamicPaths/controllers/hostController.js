@@ -3,6 +3,7 @@ const Home = require("../models/home");
 exports.getAddHome = (req, res, next) => {
     res.render("host/editHome", {
         pageTitle: "add home",
+        editing: false,
     });
 };
 
@@ -19,6 +20,7 @@ exports.getEditHome = (req, res, next) => {
         res.render("host/editHome", {
             pageTitle: "Edit Home",
             editing: editing,
+            home: home,
         });
     });
 };
