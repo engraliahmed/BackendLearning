@@ -1,7 +1,18 @@
 const Home = require("../models/home");
 
 exports.getAddHome = (req, res, next) => {
-    res.render("host/addHome", { pageTitle: "add home" });
+    res.render("host/editHome", {
+        pageTitle: "add home",
+    });
+};
+
+exports.getEditHome = (req, res, next) => {
+    const homeId = req.params.homeId;
+    const editing = req.query.editing;
+    console.log(homeId, editing);
+    res.render("host/editHome", {
+        pageTitle: "Edit Home",
+    });
 };
 
 exports.getHostHomes = (req, res, next) => {
@@ -19,4 +30,3 @@ exports.postAddHome = (req, res, next) => {
     home.save();
     res.render("host/homeAdded", { pageTitle: "Success" });
 };
-
