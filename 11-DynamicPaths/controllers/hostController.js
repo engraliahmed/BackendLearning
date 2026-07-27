@@ -9,10 +9,17 @@ exports.getAddHome = (req, res, next) => {
 exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId;
     const editing = req.query.editing === "true";
-    console.log(homeId, editing);
-    res.render("host/editHome", {
-        pageTitle: "Edit Home",
-        editing: editing,
+
+    Home.findById(homeId, (home) => {
+        if (!home) {
+            console.log("Home not found for editing");
+            return res.redirect("/host/hostHomeList");
+        }
+        console.log(homeId, editing, home);
+        res.render("host/editHome", {
+            pageTitle: "Edit Home",
+            editing: editing,
+        });
     });
 };
 
