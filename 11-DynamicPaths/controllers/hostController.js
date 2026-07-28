@@ -38,7 +38,7 @@ exports.postAddHome = (req, res, next) => {
     const { houseName, price, date, location, image } = req.body;
     const home = new Home(houseName, price, date, location, image);
     home.save();
-    res.render("host/homeAdded", { pageTitle: "Success" });
+    res.redirect("/host/hostHomeList");
 };
 
 exports.postEditHome = (req, res, next) => {
@@ -48,5 +48,5 @@ exports.postEditHome = (req, res, next) => {
     home.id = id;
     home.save();
 
-    res.redirect("host/hostHomeList");
+    res.redirect("/host/hostHomeList");
 };

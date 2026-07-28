@@ -16,9 +16,24 @@ module.exports = class Home {
     }
 
     save() {
-        this.id = Math.random().toString();
+        if (this.id) {
+        } else {
+        }
         Home.fetchAll((registeredHomes) => {
-            registeredHomes.push(this);
+            if (this.id) {
+                //edit home case
+                registeredHomes = registeredHomes.map((home) => {
+                    if (home.id === this.id) {
+                        return this;
+                    }
+                    return home;
+                });
+            } else {
+                //add home case
+                this.id = Math.random().toString();
+                registeredHomes.push(this);
+            }
+
             fs.writeFile(homePath, JSON.stringify(registeredHomes), (error) => {
                 console.log("file writing added", error);
             });
