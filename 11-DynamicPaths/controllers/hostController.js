@@ -41,6 +41,16 @@ exports.postAddHome = (req, res, next) => {
     res.redirect("/host/hostHomeList");
 };
 
+exports.postDeleteHome = (req, res, next) => {
+    const homeId = req.params.homeId;
+    Home.deleteByID(homeId, (error) => {
+        if (error) {
+            console.log("Error while deleting", error);
+        }
+        res.redirect("/host/hostHomeList");
+    });
+};
+
 exports.postEditHome = (req, res, next) => {
     const { id, houseName, price, date, location, image } = req.body;
     const home = new Home(houseName, price, date, location, image);
