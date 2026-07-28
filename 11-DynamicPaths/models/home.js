@@ -16,9 +16,6 @@ module.exports = class Home {
     }
 
     save() {
-        if (this.id) {
-        } else {
-        }
         Home.fetchAll((registeredHomes) => {
             if (this.id) {
                 //edit home case

@@ -49,7 +49,7 @@ exports.postDeleteHome = (req, res, next) => {
         }
         res.redirect("/host/hostHomeList");
     });
-};
+}; 
 
 exports.postEditHome = (req, res, next) => {
     const { id, houseName, price, date, location, image } = req.body;
