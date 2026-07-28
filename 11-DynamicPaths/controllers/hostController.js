@@ -40,3 +40,13 @@ exports.postAddHome = (req, res, next) => {
     home.save();
     res.render("host/homeAdded", { pageTitle: "Success" });
 };
+
+exports.postEditHome = (req, res, next) => {
+    const { id, houseName, price, date, location, image } = req.body;
+    const home = new Home(houseName, price, date, location, image);
+
+    home.id = id;
+    home.save();
+
+    res.redirect("host/hostHomeList");
+};
