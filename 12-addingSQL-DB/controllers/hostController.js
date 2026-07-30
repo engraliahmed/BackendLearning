@@ -35,8 +35,8 @@ exports.getHostHomes = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res, next) => {
-    const { houseName, price, date, location, image } = req.body;
-    const home = new Home(houseName, price, date, location, image);
+    const { houseName, price, date, location, image, description} = req.body;
+    const home = new Home(houseName, price, date, location, image, description);
     home.save();
     res.redirect("/host/hostHomeList");
 };
@@ -52,10 +52,9 @@ exports.postDeleteHome = (req, res, next) => {
 };
 
 exports.postEditHome = (req, res, next) => {
-    const { id, houseName, price, date, location, image } = req.body;
-    const home = new Home(houseName, price, date, location, image);
+    const { id, houseName, price, date, location, image, description } = req.body;
+    const home = new Home(id, houseName, price, date, location, image, description);
 
-    home.id = id;
     home.save();
 
     res.redirect("/host/hostHomeList");

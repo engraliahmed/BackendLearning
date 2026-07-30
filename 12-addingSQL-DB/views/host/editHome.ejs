@@ -50,6 +50,12 @@
                 value="<%= editing ? home.image : ''%>"
                 class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-red-400 focus:ring-2 focus:ring-red-100" />
             </div>
+
+            <div>
+              <label for="description" class="mb-2 block text-sm font-medium text-slate-700">description</label>
+              <textarea id="description" name="description" placeholder="Enter description"
+                class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-red-400 focus:ring-2 focus:ring-red-100"><%= editing ? home.description : ''%></textarea>
+            </div>
           </div>
           <button type="submit"
             class="w-full justify-center inline-flex rounded-xl bg-red-500 px-5 py-3 font-semibold text-white transition hover:bg-red-600">
