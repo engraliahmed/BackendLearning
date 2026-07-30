@@ -34,7 +34,11 @@ module.exports = class Home {
         return db.execute("SELECT * FROM homes");
     }
 
-    static findById(homeId, callback) {}
+    static findById(homeId) {
+        return db.execute("SELECT * FROM homes WHERE id=?", [homeId]);
+    }
 
-    static deleteByID(homeId, callback) {}
+    static deleteByID(homeId) {
+        return db.execute("DELETE FROM homes WHERE id=?", [homeId]);
+    }
 };

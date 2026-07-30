@@ -11,7 +11,8 @@ exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId;
     const editing = req.query.editing === "true";
 
-    Home.findById(homeId, (home) => {
+    Home.findById(homeId).then(([homes]) => {
+        const home = homes[0];
         if (!home) {
             console.log("Home not found for editing");
             return res.redirect("/host/hostHomeList");
@@ -35,7 +36,7 @@ exports.getHostHomes = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res, next) => {
-    const { houseName, price, date, location, image, description} = req.body;
+    const { houseName, price, date, location, image, description } = req.body;
     const home = new Home(houseName, price, date, location, image, description);
     home.save();
     res.redirect("/host/hostHomeList");
@@ -43,17 +44,27 @@ exports.postAddHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
     const homeId = req.params.homeId;
-    Home.deleteByID(homeId, (error) => {
-        if (error) {
-            console.log("Error while deleting", error);
-        }
-        res.redirect("/host/hostHomeList");
-    });
+    Home.deleteByID(homeId)
+        .then(() => {
+            res.redirect("/host/hostHomeList");
+        })
+        .catch((error) => {
+            console.log("error while delete", error);
+        });
 };
 
 exports.postEditHome = (req, res, next) => {
-    const { id, houseName, price, date, location, image, description } = req.body;
-    const home = new Home(id, houseName, price, date, location, image, description);
+    const { id, houseName, price, date, location, image, description } =
+        req.body;
+    const home = new Home(
+        id,
+        houseName,
+        price,
+        date,
+        location,
+        image,
+        description,
+    );
 
     home.save();
 
