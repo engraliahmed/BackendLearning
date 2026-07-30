@@ -12,8 +12,21 @@ module.exports = class Home {
     }
 
     save() {
+        // If you go with this syntax this will cause SQL injection you are directly sending query to the DataBase if hacker attacks and add DELETE query it will drop your table instead follow the next one
+        // return db.execute(
+        //     `INSERT INTO homes (houseName, price, date, location, image, description) VALUES ('${this.houseName}',${this.price}, ${this.date}, '${this.location}', '${this.image}', '${this.description}')`
+        // );
+
         return db.execute(
-            `INSERT into (houseName, price, date, location, image, description) VALUES (('${this.houseName}',${this.price}, ${this.date}, '${this.location}', '${this.image}', '${this.description}') )`,
+            "INSERT INTO homes (houseName, price, date, location, image, description) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                this.houseName,
+                this.price,
+                this.date,
+                this.location,
+                this.image,
+                this.description,
+            ],
         );
     }
 

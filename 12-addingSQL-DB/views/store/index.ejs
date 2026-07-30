@@ -72,7 +72,7 @@
                               <div class="rounded-xl bg-slate-50 px-2.5 py-2">
                                 <p class="text-slate-500">Date</p>
                                 <p class="mt-0.5 font-semibold text-slate-900">
-                                  <%= home.date %>
+                                  <%= new Date(home.date).toISOString().split('T')[0] %>
                                 </p>
                               </div>
                               <div class="rounded-xl bg-slate-50 px-2.5 py-2">
