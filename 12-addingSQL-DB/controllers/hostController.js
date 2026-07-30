@@ -26,12 +26,12 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.getHostHomes = (req, res, next) => {
-    const registeredHomes = Home.fetchAll((registeredHomes) =>
+    Home.fetchAll().then(([registeredHomes]) => {
         res.render("host/hostHomeList", {
             registeredHomes,
             pageTitle: "Host Home List",
-        }),
-    );
+        });
+    });
 };
 
 exports.postAddHome = (req, res, next) => {
@@ -49,7 +49,7 @@ exports.postDeleteHome = (req, res, next) => {
         }
         res.redirect("/host/hostHomeList");
     });
-}; 
+};
 
 exports.postEditHome = (req, res, next) => {
     const { id, houseName, price, date, location, image } = req.body;

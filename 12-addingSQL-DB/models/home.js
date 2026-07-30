@@ -1,11 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-const rootDir = require("../utils/pathUtil");
-const { stringify } = require("querystring");
-const Favourite = require("./favourite");
-
-let registeredHomes = [];
-const homePath = path.join(rootDir, "data", "homes.json");
+const db = require("../utils/databaseUtil");
 
 module.exports = class Home {
     constructor(houseName, price, date, location, image) {
@@ -16,52 +9,13 @@ module.exports = class Home {
         this.image = image;
     }
 
-    save() {
-        Home.fetchAll((registeredHomes) => {
-            if (this.id) {
-                //edit home case
-                registeredHomes = registeredHomes.map((home) => {
-                    if (home.id === this.id) {
-                        return this;
-                    }
-                    return home;
-                });
-            } else {
-                //add home case
-                this.id = Math.random().toString();
-                registeredHomes.push(this);
-            }
-
-            fs.writeFile(homePath, JSON.stringify(registeredHomes), (error) => {
-                console.log("file writing added", error);
-            });
-        });
-    }
+    save() {}
 
     static fetchAll(callback) {
-        fs.readFile(homePath, (err, data) => {
-            if (!err) {
-                callback(JSON.parse(data));
-            } else {
-                callback([]);
-            }
-        });
+        return db.execute("SELECT * FROM homes")
     }
 
-    static findById(homeId, callback) {
-        this.fetchAll((homes) => {
-            const homeFound = homes.find((home) => home.id === homeId);
-            callback(homeFound);
-        });
-    }
+    static findById(homeId, callback) {}
 
-    static deleteByID(homeId, callback) {
-        this.fetchAll((homes) => {
-            const updatedHomes = homes.filter((home) => home.id !== homeId);
-
-            fs.writeFile(homePath, JSON.stringify(updatedHomes), (error) => {
-                Favourite.deleteByID(homeId, callback);
-            });
-        });
-    }
+    static deleteByID(homeId, callback) {}
 };
