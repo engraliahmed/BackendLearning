@@ -10,6 +10,15 @@ const hostRouter = require("./routes/hostRouter");
 const rootDir = require("./utils/pathUtil");
 const errorsController = require("./controllers/errors");
 
+const db = require("./utils/databaseUtil");
+db.execute("SELECT * FROM homes")
+    .then((result) => {
+        console.log("Getting from DB:", result);
+    })
+    .catch((error) => {
+        console.log("Error while reading from db");
+    });
+
 const app = express();
 
 app.set("view engine", "ejs");
