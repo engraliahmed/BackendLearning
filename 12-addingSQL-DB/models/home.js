@@ -1,14 +1,14 @@
 const db = require("../utils/databaseUtil");
 
 module.exports = class Home {
-    constructor(houseName, price, date, location, image, description, id) {
+    constructor(id, houseName, price, date, location, image, description) {
+        this.id = id;
         this.houseName = houseName;
         this.price = price;
         this.date = date;
         this.location = location;
         this.image = image;
         this.description = description;
-        this.id = id;
     }
 
     save() {
@@ -17,17 +17,32 @@ module.exports = class Home {
         //     `INSERT INTO homes (houseName, price, date, location, image, description) VALUES ('${this.houseName}',${this.price}, ${this.date}, '${this.location}', '${this.image}', '${this.description}')`
         // );
 
-        return db.execute(
-            "INSERT INTO homes (houseName, price, date, location, image, description) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                this.houseName,
-                this.price,
-                this.date,
-                this.location,
-                this.image,
-                this.description,
-            ],
-        );
+        if (this.id) {
+            return db.execute(
+                "UPDATE homes SET houseName=?, price=?, date=?, location=?, image=?, description=? WHERE id=?",
+                [
+                    this.houseName,
+                    this.price,
+                    this.date,
+                    this.location,
+                    this.image,
+                    this.description,
+                    this.id,
+                ],
+            );
+        } else {
+            return db.execute(
+                "INSERT INTO homes (houseName, price, date, location, image, description) VALUES (?, ?, ?, ?, ?, ?)",
+                [
+                    this.houseName,
+                    this.price,
+                    this.date,
+                    this.location,
+                    this.image,
+                    this.description,
+                ],
+            );
+        }
     }
 
     static fetchAll(callback) {

@@ -32,7 +32,8 @@
               </div>
               <div>
                 <label for="date" class="mb-2 block text-sm font-medium text-slate-700">Available date</label>
-                <input id="date" type="date" name="date" value="<%= editing ? home.date : ''%>"
+                <input id="date" type="date" name="date"
+                  value="<%= editing && home.date ? new Date(home.date).toISOString().split('T')[0] : '' %>"
                   class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-red-400 focus:ring-2 focus:ring-red-100" />
               </div>
             </div>

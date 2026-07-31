@@ -65,8 +65,12 @@ exports.postEditHome = (req, res, next) => {
         image,
         description,
     );
-
-    home.save();
-
-    res.redirect("/host/hostHomeList");
+    
+    home.save()
+        .then(() => {
+            res.redirect("/host/hostHomeList");
+        })
+        .catch((err) => {
+            console.log("Error updating home:", err);
+        });
 };
