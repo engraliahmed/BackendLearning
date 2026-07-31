@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Core Module
 const path = require("path");
 
