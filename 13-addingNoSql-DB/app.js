@@ -1,9 +1,8 @@
-require("dotenv").config();
-
 // Core Module
 const path = require("path");
 
 // External Module
+require("dotenv").config();
 const express = require("express");
 
 //Local Module
