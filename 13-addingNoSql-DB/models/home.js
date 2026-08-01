@@ -1,14 +1,14 @@
 const { getDB } = require("../utils/databaseUtil");
 
 module.exports = class Home {
-    constructor(id, houseName, price, date, location, image, description) {
-        this.id = id;
+    constructor(houseName, price, date, location, image, description, id) {
         this.houseName = houseName;
         this.price = price;
         this.date = date;
         this.location = location;
         this.image = image;
         this.description = description;
+        this.id = id;
     }
 
     save() {
