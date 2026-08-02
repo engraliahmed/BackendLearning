@@ -12,12 +12,12 @@ module.exports = class Home {
     }
 
     save() {
-        const db = getDB();
         return db.collection("homes").insertOne(this);
     }
 
     static fetchAll(callback) {
-        return db.execute("SELECT * FROM homes");
+        const db = getDB();
+        return db.collection("homes").find().toArray();
     }
 
     static findById(homeId) {
