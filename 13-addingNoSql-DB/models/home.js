@@ -15,7 +15,13 @@ module.exports = class Home {
     }
 
     save() {
-        return db.collection("homes").insertOne(this);
+        const db = getDB();
+        if(this._id){ //update
+            
+        }
+        else{  //insert
+            return db.collection("homes").insertOne(this);
+        }
     }
 
     static fetchAll(callback) {
@@ -24,7 +30,6 @@ module.exports = class Home {
     }
 
     static findById(homeId) {
-        console.log(homeId);
         const db = getDB();
         return db
             .collection("homes")
@@ -33,6 +38,9 @@ module.exports = class Home {
     }
 
     static deleteByID(homeId) {
-        return db.execute("DELETE FROM homes WHERE id=?", [homeId]);
+        const db = getDB();
+        return db
+            .collection("homes")
+            .deleteOne({ _id: new ObjectId(String(homeId)) });
     }
 };
