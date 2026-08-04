@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { getDB } = require("../utils/databaseUtil");
 
 module.exports = class Home {
@@ -25,7 +26,10 @@ module.exports = class Home {
     static findById(homeId) {
         console.log(homeId);
         const db = getDB();
-        return db.collection("homes").find({ _id: homeId }).next();
+        return db
+            .collection("homes")
+            .find({ _id: new ObjectId(String(homeId)) })
+            .next();
     }
 
     static deleteByID(homeId) {
