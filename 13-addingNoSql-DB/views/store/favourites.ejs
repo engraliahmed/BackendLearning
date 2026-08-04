@@ -91,7 +91,7 @@
                                 </p>
 
                                 <div class="mt-3 flex items-center gap-2.5">
-                                  <a href="/homes/<%= home.id %>"
+                                  <a href="/homes/<%= home._id %>"
                                     class="inline-flex flex-1 items-center justify-center rounded-xl bg-slate-900 px-2 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">
                                     View Details
                                   </a>
@@ -100,8 +100,9 @@
                                     More homes
                                   </a>
 
-                                  <form action="favourites/delete/<%= home.id%>" method="POST">
-                                    <button class="inline-flex bg-red-500 cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-red-800">Remove</button>
+                                  <form action="favourites/delete/<%= home._id%>" method="POST">
+                                    <button
+                                      class="inline-flex bg-red-500 cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-red-800">Remove</button>
                                   </form>
                                 </div>
                               </div>

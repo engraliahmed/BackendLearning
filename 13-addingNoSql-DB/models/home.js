@@ -1,14 +1,16 @@
 const { getDB } = require("../utils/databaseUtil");
 
 module.exports = class Home {
-    constructor(houseName, price, date, location, image, description, id) {
+    constructor(houseName, price, date, location, image, description, _id) {
         this.houseName = houseName;
         this.price = price;
         this.date = date;
         this.location = location;
         this.image = image;
         this.description = description;
-        this.id = id;
+        if (_id) {
+            this._id = _id;
+        }
     }
 
     save() {
@@ -21,7 +23,9 @@ module.exports = class Home {
     }
 
     static findById(homeId) {
-        return db.execute("SELECT * FROM homes WHERE id=?", [homeId]);
+        console.log(homeId);
+        const db = getDB();
+        return db.collection("homes").find({ _id: homeId }).next();
     }
 
     static deleteByID(homeId) {
