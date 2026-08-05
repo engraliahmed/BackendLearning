@@ -16,10 +16,25 @@ module.exports = class Home {
 
     save() {
         const db = getDB();
-        if(this._id){ //update
-            
-        }
-        else{  //insert
+        if (this._id) {
+            //update
+
+            const updateFields = {
+                houseName: this.houseName,
+                price: this.price,
+                date: this.date,
+                location: this.location,
+                image: this.image,
+                description: this.description,
+            };
+            return db
+                .collection("homes")
+                .updateOne(
+                    { _id: new ObjectId(String(this._id)) },
+                    { $set: updateFields },
+                );
+        } else {
+            //insert
             return db.collection("homes").insertOne(this);
         }
     }
