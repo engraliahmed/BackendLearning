@@ -11,10 +11,9 @@ module.exports = class Favourite {
     }
 
     static getFavourite() {
-
+        const db = getDB();
+        return db.collection("favourites").find().toArray();
     }
 
-    static deleteByID(delHomeId, callback) {
-
-    }
+    static deleteByID(delHomeId, callback) {}
 };

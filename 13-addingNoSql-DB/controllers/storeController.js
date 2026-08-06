@@ -26,8 +26,9 @@ exports.getBookings = (req, res, next) => {
 };
 
 exports.getFavouriteList = (req, res, next) => {
-    Favourite.getFavourite((favouriteIds) => {
+    Favourite.getFavourite().then((favouriteIds) => {
         Home.fetchAll().then((registeredHomes) => {
+            
             const favouriteHomes = registeredHomes.filter((home) =>
                 favouriteIds.includes(home._id),
             );
@@ -41,16 +42,18 @@ exports.getFavouriteList = (req, res, next) => {
 };
 
 exports.postAddToFavourite = (req, res, next) => {
-    const homeId = req.body.id
-    const fav = new Favourite(homeId)
-    fav.save().then(result =>{
-        console.log('Favourite added', result);
-    }).catch(err => {
-        console.log("Error while adding favourite", err)
-    }).finally(()=>{
-        res.redirect('/favourites')
-    })
-
+    const homeId = req.body.id;
+    const fav = new Favourite(homeId);
+    fav.save()
+        .then((result) => {
+            console.log("Favourite added", result);
+        })
+        .catch((err) => {
+            console.log("Error while adding favourite", err);
+        })
+        .finally(() => {
+            res.redirect("/favourites");
+        });
 };
 
 exports.postRemoveFromFavourite = (req, res, next) => {
