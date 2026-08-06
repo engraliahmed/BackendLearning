@@ -27,8 +27,9 @@ exports.getBookings = (req, res, next) => {
 
 exports.getFavouriteList = (req, res, next) => {
     Favourite.getFavourite().then((favouriteIds) => {
+        favouriteIds = favouriteIds.map(fav => fav.houseId)
         Home.fetchAll().then((registeredHomes) => {
-            
+
             const favouriteHomes = registeredHomes.filter((home) =>
                 favouriteIds.includes(home._id),
             );
