@@ -10,9 +10,11 @@ module.exports = class Favourite {
         return db.collection("favourites").insertOne(this);
     }
 
-    static addToFavourite(homeId, callback) {}
+    static getFavourite() {
 
-    static getFavourite(callback) {}
+    }
 
-    static deleteByID(delHomeId, callback) {}
+    static deleteByID(delHomeId, callback) {
+
+    }
 };
