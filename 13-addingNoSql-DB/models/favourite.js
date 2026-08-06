@@ -17,7 +17,7 @@ module.exports = class Favourite {
                 return Promise.resolve();
             });
     }
-
+    
     static getFavourite() {
         const db = getDB();
         return db.collection("favourites").find().toArray();
