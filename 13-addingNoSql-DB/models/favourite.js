@@ -15,5 +15,8 @@ module.exports = class Favourite {
         return db.collection("favourites").find().toArray();
     }
 
-    static deleteByID(delHomeId, callback) {}
+    static deleteByID(delHomeId) {
+        const db = getDB();
+        return db.collection("favourites").deleteOne({houseId: delHomeId})
+    }
 };
