@@ -36,7 +36,7 @@ exports.getHostHomes = (req, res, next) => {
 
 exports.postAddHome = (req, res, next) => {
     const { houseName, price, date, location, image, description } = req.body;
-    const home = new Home(houseName, price, date, location, image, description);
+    const home = new Home({houseName, price, date, location, image, description});
     home.save().then(() => {
         console.log("Home saved successfully");
     });
