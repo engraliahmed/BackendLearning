@@ -63,7 +63,8 @@ exports.postAddToFavourite = (req, res, next) => {
 
 exports.postRemoveFromFavourite = (req, res, next) => {
     const homeId = req.params.homeId;
-    Favourite.deleteByID(homeId)
+    console.log(homeId);
+    Favourite.findOneAndDelete({houseId: homeId})
         .then((result) => {
             console.log("Favourite removed", result);
         })
