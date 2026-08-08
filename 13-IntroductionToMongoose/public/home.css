@@ -228,9 +228,6 @@
   }
 }
 @layer utilities {
-  .static {
-    position: static;
-  }
   .mx-3 {
     margin-inline: calc(var(--spacing) * 3);
   }
