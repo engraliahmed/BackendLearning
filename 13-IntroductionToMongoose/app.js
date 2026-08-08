@@ -10,7 +10,8 @@ const storeRouter = require("./routes/storeRouter");
 const hostRouter = require("./routes/hostRouter");
 const rootDir = require("./utils/pathUtil");
 const errorsController = require("./controllers/errors");
-const {mongoConnect} = require("./utils/databaseUtil");
+const { mongoConnect } = require("./utils/databaseUtil");
+const { default: mongoose } = require("mongoose");
 
 const app = express();
 
@@ -26,8 +27,16 @@ app.use(express.static(path.join(rootDir, "public")));
 app.use(errorsController.get404);
 
 const PORT = 3000;
-mongoConnect(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running on address http://localhost:${PORT}`);
+const MONGO_URL = process.env.MONGO_URL;
+
+mongoose
+    .connect(MONGO_URL)
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log("Connected to MongoDB");
+            console.log(`Server running on address http://localhost:${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.log("Error while connecting to MongoDB", err);
     });
-});
