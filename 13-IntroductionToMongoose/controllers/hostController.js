@@ -52,7 +52,7 @@ exports.postAddHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
     const homeId = req.params.homeId;
-    Home.deleteByID(homeId)
+    Home.findByIdAndDelete(homeId)
         .then(() => {
             res.redirect("/host/hostHomeList");
         })
@@ -64,21 +64,24 @@ exports.postDeleteHome = (req, res, next) => {
 exports.postEditHome = (req, res, next) => {
     const { id, houseName, price, date, location, image, description } =
         req.body;
-    const home = new Home(
-        houseName,
-        price,
-        date,
-        location,
-        image,
-        description,
-        id,
-    );
 
-    home.save()
-        .then(() => {
-            res.redirect("/host/hostHomeList");
-        })
-        .catch((err) => {
-            console.log("Error updating home:", err);
-        });
+    Home.findById(id).then((home) => {
+        home.houseName = houseName;
+        home.price = price;
+        home.date = date;
+        home.location = location;
+        home.image = image;
+        home.description = description;
+
+        home.save()
+            .then((result) => {
+                console.log("Result Updated", result);
+            })
+            .catch((err) => {
+                console.log("Error while editing", err);
+            });
+        res.redirect("/host/hostHomeList");
+    }).catch((err)=>{
+        console.log("Error while finding home");
+    });
 };
