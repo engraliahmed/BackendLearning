@@ -1,0 +1,61 @@
+<%- include('../partials/head')%>
+  </head>
+
+  <body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between">
+    <%- include('../partials/nav')%>
+
+      <main class="flex flex-1 items-center justify-center px-4 py-12">
+        <div
+          class="w-full max-w-md rounded-2xl border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-100/50 backdrop-blur-md">
+          <div class="text-center">
+            <span
+              class="inline-block rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-600 mb-3">Welcome Back</span>
+            <h1 class="text-2xl font-bold tracking-tight text-slate-900">Sign in to your account</h1>
+            <p class="mt-2 text-sm text-slate-500">Enter your email and password below to continue</p>
+          </div>
+
+          <form action="/login" method="POST" class="mt-8 space-y-5">
+            <div>
+              <label for="email"
+                class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5">Email
+                Address</label>
+              <input type="email" id="email" name="email" required placeholder="name@example.com"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rose-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-500/10 transition-all duration-200" />
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="password"
+                  class="block text-xs font-semibold uppercase tracking-wider text-slate-600">Password</label>
+                <a href="#" class="text-xs font-medium text-rose-600 hover:text-rose-500">Forgot
+                  password?</a>
+              </div>
+              <input type="password" id="password" name="password" required placeholder="••••••••"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rose-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-rose-500/10 transition-all duration-200" />
+            </div>
+
+            <div class="flex items-center">
+              <input type="checkbox" id="remember" name="remember"
+                class="h-4 w-4 rounded border-slate-300 text-rose-600 focus:ring-rose-500">
+              <label for="remember" class="ml-2 text-sm text-slate-600">Remember me for 30 days</label>
+            </div>
+
+            <button type="submit"
+              class="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition-all duration-200 hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/25 active:scale-[0.99] cursor-pointer">
+              Sign In
+            </button>
+          </form>
+
+          <p class="mt-8 text-center text-xs text-slate-500">
+            Don't have an account?
+            <a href="#" class="font-semibold text-rose-600 hover:text-rose-500">Create one</a>
+          </p>
+        </div>
+      </main>
+
+      <footer class="py-6 text-center text-xs text-slate-400">
+        &copy; <%= new Date().getFullYear() %> Airbnb Clone. All rights reserved.
+      </footer>
+  </body>
+
+  </html>
