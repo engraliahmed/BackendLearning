@@ -1,0 +1,87 @@
+const Home = require("../models/home");
+
+exports.getAddHome = (req, res, next) => {
+    res.render("host/editHome", {
+        pageTitle: "add home",
+        editing: false,
+    });
+};
+
+exports.getEditHome = (req, res, next) => {
+    const homeId = req.params.homeId;
+    const editing = req.query.editing === "true";
+
+    Home.findById(homeId).then((home) => {
+        if (!home) {
+            console.log("Home not found for editing");
+            return res.redirect("/host/hostHomeList");
+        }
+        console.log(homeId, editing, home);
+        res.render("host/editHome", {
+            pageTitle: "Edit Home",
+            editing: editing,
+            home: home,
+        });
+    });
+};
+
+exports.getHostHomes = (req, res, next) => {
+    Home.find().then((registeredHomes) => {
+        res.render("host/hostHomeList", {
+            registeredHomes,
+            pageTitle: "Host Home List",
+        });
+    });
+};
+
+exports.postAddHome = (req, res, next) => {
+    const { houseName, price, date, location, image, description } = req.body;
+    const home = new Home({
+        houseName,
+        price,
+        date,
+        location,
+        image,
+        description,
+    });
+    home.save().then(() => {
+        console.log("Home saved successfully");
+    });
+    res.redirect("/host/hostHomeList");
+};
+
+exports.postDeleteHome = (req, res, next) => {
+    const homeId = req.params.homeId;
+    Home.findByIdAndDelete(homeId)
+        .then(() => {
+            res.redirect("/host/hostHomeList");
+        })
+        .catch((error) => {
+            console.log("error while delete", error);
+        });
+};
+
+exports.postEditHome = (req, res, next) => {
+    const { id, houseName, price, date, location, image, description } =
+        req.body;
+
+    Home.findById(id).then((home) => {
+        home.houseName = houseName;
+        home.price = price;
+        home.date = date;
+        home.location = location;
+        home.image = image;
+        home.description = description;
+
+        home.save()
+            .then((result) => {
+                console.log("Result Updated", result);
+            })
+            .catch((err) => {
+                console.log("Error while editing", err);
+            });
+        res.redirect("/host/hostHomeList");
+    }).catch((err)=>{
+        console.log("Error while finding home");
+    });
+};
