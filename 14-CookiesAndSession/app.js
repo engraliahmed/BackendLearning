@@ -19,8 +19,20 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.urlencoded());
+
+//Cookie Middleware
+app.use((req, res, next) => {
+    req.isLoggedIn = req.get("Cookie")
+        ? req.get("Cookie").split("=")[1] === 'true'
+        : false;
+
+    next();
+});
+
 app.use(authRouter);
 app.use(storeRouter);
+
+//isLoggedIn middleware
 app.use("/host", (req, res, next) => {
     if (req.isLoggedIn) {
         next();
@@ -28,6 +40,7 @@ app.use("/host", (req, res, next) => {
         res.redirect("/login");
     }
 });
+
 app.use("/host", hostRouter);
 
 app.use(express.static(path.join(rootDir, "public")));
