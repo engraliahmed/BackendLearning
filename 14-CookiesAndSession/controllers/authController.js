@@ -13,3 +13,8 @@ exports.postLogin = (req, res, next) => {
     res.redirect("/");
 };
 
+exports.postLogout = (req, res, next) => {
+    // res.cookie('isLoggedIn', false)
+    res.clearCookie("isLoggedIn"); //we can use clearcookie method as well
+    res.redirect("/");
+};
