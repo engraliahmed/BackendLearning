@@ -6,6 +6,7 @@
             </a>
         </h1>
         <nav class="flex items-center gap-3 text-sm font-medium">
+            <% if (isLoggedIn) {%>
             <a href="/homes" class="rounded-full bg-red-50 px-3 py-1 text-red-600 transition hover:bg-red-100">
                 Home List
             </a>
@@ -29,6 +30,7 @@
                 class="rounded-full px-3 py-1 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
                 My Homes
             </a>
+            <% } %>
 
             <a href="/login"
                 class="bg-red-500 rounded-full px-3 py-1 text-white transition hover:bg-red-600 ">

@@ -6,6 +6,7 @@ exports.getIndex = (req, res, next) => {
         res.render("store/index", {
             registeredHomes,
             pageTitle: "airbnb Home",
+            isLoggedIn: req.isLoggedIn,
         });
     });
 };
@@ -15,6 +16,7 @@ exports.getHomes = (req, res, next) => {
         res.render("store/home-list", {
             registeredHomes,
             pageTitle: "Homes List",
+            isLoggedIn: req.isLoggedIn,
         });
     });
 };
@@ -22,19 +24,21 @@ exports.getHomes = (req, res, next) => {
 exports.getBookings = (req, res, next) => {
     res.render("store/bookings", {
         pageTitle: "My Bookings",
+        isLoggedIn: req.isLoggedIn,
     });
 };
 
 exports.getFavouriteList = (req, res, next) => {
-  Favourite.find()
-  .populate('houseId')
-  .then((favourites) => {
-    const favouriteHomes = favourites.map((fav) => fav.houseId);
-    res.render("store/favourites", {
-      favourites: favouriteHomes,
-      pageTitle: "My Favourites",
-    });
-  });
+    Favourite.find()
+        .populate("houseId")
+        .then((favourites) => {
+            const favouriteHomes = favourites.map((fav) => fav.houseId);
+            res.render("store/favourites", {
+                favourites: favouriteHomes,
+                pageTitle: "My Favourites",
+                isLoggedIn: req.isLoggedIn,
+            });
+        });
 };
 
 exports.postAddToFavourite = (req, res, next) => {
@@ -56,11 +60,10 @@ exports.postAddToFavourite = (req, res, next) => {
         });
 };
 
-
 exports.postRemoveFromFavourite = (req, res, next) => {
     const homeId = req.params.homeId;
     console.log(homeId);
-    Favourite.findOneAndDelete({houseId: homeId})
+    Favourite.findOneAndDelete({ houseId: homeId })
         .then((result) => {
             console.log("Favourite removed", result);
         })
@@ -83,6 +86,7 @@ exports.getHomeDetails = (req, res, next) => {
             res.render("store/homeDetails", {
                 home: home,
                 pageTitle: `${home.houseName} - ${home.location}`,
+                isLoggedIn: req.isLoggedIn,
             });
         }
     });
