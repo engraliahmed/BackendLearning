@@ -32,10 +32,19 @@
             </a>
             <% } %>
 
+        <% if(!isLoggedIn) { %>
             <a href="/login"
                 class="bg-red-500 rounded-full px-3 py-1 text-white transition hover:bg-red-600 ">
                 Sign in
             </a>
-        </nav>
+            <% } else { %>
+            <form action="/logout" method="POST">
+                <button type="submit"
+                    class="bg-red-500 rounded-full px-3 py-1 text-white transition hover:bg-red-600 ">
+                    Logout
+                </button>
+            </form>
+            <% } %>
+        </nav> 
     </div>
 </header>
