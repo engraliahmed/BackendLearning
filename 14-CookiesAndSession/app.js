@@ -23,16 +23,18 @@ app.set("views", "views");
 
 const store = new MongoDBStore({
     uri: process.env.MONGO_URL,
-    collection: 'sessions',
+    collection: "sessions",
 });
 
 app.use(express.urlencoded());
 
+//Session Middleware
 app.use(
     session({
         secret: "ALI AHMED KHAN IS A GOOD BOY",
         resave: false,
         saveUninitialized: true,
+        store: store,
     }),
 );
 
