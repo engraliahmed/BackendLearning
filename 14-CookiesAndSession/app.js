@@ -5,6 +5,8 @@ const path = require("path");
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const MONGO_URL = process.env.MONGO_URL;
 
 //Local Module
 const storeRouter = require("./routes/storeRouter");
@@ -18,6 +20,11 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+
+const store = new MongoDBStore({
+    uri: process.env.MONGO_URL,
+    collection: 'sessions',
+});
 
 app.use(express.urlencoded());
 
@@ -58,7 +65,6 @@ app.use(express.static(path.join(rootDir, "public")));
 app.use(errorsController.get404);
 
 const PORT = 3000;
-const MONGO_URL = process.env.MONGO_URL;
 
 mongoose
     .connect(MONGO_URL)
