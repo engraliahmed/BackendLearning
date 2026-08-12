@@ -31,9 +31,10 @@ app.use(
 
 //Cookie Middleware
 app.use((req, res, next) => {
-    req.isLoggedIn = req.get("Cookie")
-        ? req.get("Cookie").split("=")[1] === "true"
-        : false;
+    // req.isLoggedIn = req.get("Cookie")
+    //     ? req.get("Cookie").split("=")[1] === "true"
+    //     : false;
+    req.isLoggedIn = req.session.isLoggedIn;
 
     next();
 });
