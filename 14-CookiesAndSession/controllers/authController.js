@@ -16,6 +16,8 @@ exports.postLogin = (req, res, next) => {
 
 exports.postLogout = (req, res, next) => {
     // res.cookie('isLoggedIn', false)
-    res.clearCookie("isLoggedIn"); //we can use clearcookie method as well
-    res.redirect("/");
+   // res.clearCookie("isLoggedIn"); //we can use clearcookie method as well
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
 };
