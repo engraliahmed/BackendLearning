@@ -21,12 +21,18 @@ app.set("views", "views");
 
 app.use(express.urlencoded());
 
-
+app.use(
+    session({
+        secret: "ALI AHMED KHAN IS A GOOD BOY",
+        resave: false,
+        saveUninitialized: true,
+    }),
+);
 
 //Cookie Middleware
 app.use((req, res, next) => {
     req.isLoggedIn = req.get("Cookie")
-        ? req.get("Cookie").split("=")[1] === 'true'
+        ? req.get("Cookie").split("=")[1] === "true"
         : false;
 
     next();
