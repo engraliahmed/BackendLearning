@@ -4,6 +4,7 @@ const path = require("path");
 // External Module
 require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 
 //Local Module
 const storeRouter = require("./routes/storeRouter");
@@ -19,6 +20,8 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.urlencoded());
+
+
 
 //Cookie Middleware
 app.use((req, res, next) => {
