@@ -44,7 +44,6 @@ app.use((req, res, next) => {
     //     ? req.get("Cookie").split("=")[1] === "true"
     //     : false;
     req.isLoggedIn = req.session.isLoggedIn;
-
     next();
 });
 
@@ -61,9 +60,7 @@ app.use("/host", (req, res, next) => {
 });
 
 app.use("/host", hostRouter);
-
 app.use(express.static(path.join(rootDir, "public")));
-
 app.use(errorsController.get404);
 
 const PORT = 3000;
